@@ -1,9 +1,11 @@
 import flet as ft
+from routers import page_0, page_1, page_2
 
 async def main(page: ft.Page):
     page.window.width = 1420
     page.window.height = 830
     page.title = "App"
+
 
     body_content=ft.Column(
         alignment=ft.MainAxisAlignment.START,
@@ -11,15 +13,23 @@ async def main(page: ft.Page):
         controls=[]
     )
 
-    async def change_route(e):
+    def change_route(e):
+        body_content.controls.clear()
         index = e.control.selected_index
 
         if index == 0:
-            body_content.controls = [
-                ft.Text("It's firts page", size=24, weight=ft.FontWeight.BOLD),
-                ft.ElevatedButton("Like", icon=ft.Icons.FAVORITE, on_click=lambda e: print("Like"))
-            ]
-        # elif index == 1:
+            body_content.controls.append(page_0())
+
+        elif index == 1:
+            body_content.controls.append(page_1())
+
+        elif index == 2:
+            body_content.controls.append(page_2())
+
+        page.update()
+
+
+    log_out = ft.Button(icon=ft.Icons.LOGOUT, on_click=...)    
 
 
     rail = ft.NavigationRail(
@@ -50,6 +60,9 @@ async def main(page: ft.Page):
                 selected_icon=ft.Icons.EDIT_ATTRIBUTES_OUTLINED,
                 label="Settings"
             ),
+            ft.NavigationRailDestination(
+                icon=ft.Icons.LOGOUT,
+            )
         ],
     )
 
