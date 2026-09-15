@@ -29,8 +29,30 @@ async def main(page: ft.Page):
         page.update()
 
 
-    log_out = ft.Button(icon=ft.Icons.LOGOUT, on_click=...)    
+    log_out = ft.Column(
+        controls=[
+            ft.IconButton(
+                icon=ft.Icons.LOGOUT,
+                #icon_color=
+                on_click=lambda e: print("qwe")
+            ),
+        ],
+        alignment=ft.MainAxisAlignment.END,
+        expand=True
+    ) 
+    dlg = ft.AlertDialog(
+        title="Add new order",
+        content=ft.Column(
+                controls=[
+                ft.TextField(label="name"),
+                ft.TextField(label="surname")
+            ]
+        ),
+        actions=ft.Button("qwe")
+    )
 
+    def show_dlg(e):
+        page.show_dialog(dlg)
 
     rail = ft.NavigationRail(
         selected_index=0,
@@ -42,8 +64,10 @@ async def main(page: ft.Page):
         leading=ft.FloatingActionButton(
             icon=ft.Icons.CREATE,
             content="Add",
-            on_click=lambda e: print("FAB")
+            on_click=show_dlg
         ),
+        pin_trailing_to_bottom=True,
+        trailing=log_out,
         destinations=[
             ft.NavigationRailDestination(
                 icon=ft.Icons.FAVORITE_BORDER,
@@ -59,9 +83,6 @@ async def main(page: ft.Page):
                 icon=ft.Icons.SETTINGS,
                 selected_icon=ft.Icons.EDIT_ATTRIBUTES_OUTLINED,
                 label="Settings"
-            ),
-            ft.NavigationRailDestination(
-                icon=ft.Icons.LOGOUT,
             )
         ],
     )
