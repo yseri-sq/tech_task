@@ -1,11 +1,12 @@
 import flet as ft
-from routers import page_0, page_1, page_2
+from routers import page_0, page_1, page_2, dlg
+from db import create_db
 
 async def main(page: ft.Page):
     page.window.width = 1420
     page.window.height = 830
     page.title = "App"
-
+    
 
     body_content=ft.Column(
         alignment=ft.MainAxisAlignment.START,
@@ -39,20 +40,10 @@ async def main(page: ft.Page):
         ],
         alignment=ft.MainAxisAlignment.END,
         expand=True
-    ) 
-    dlg = ft.AlertDialog(
-        title="Add new order",
-        content=ft.Column(
-                controls=[
-                ft.TextField(label="name"),
-                ft.TextField(label="surname")
-            ]
-        ),
-        actions=ft.Button("qwe")
     )
 
     def show_dlg(e):
-        page.show_dialog(dlg)
+        page.show_dialog(dlg())
 
     rail = ft.NavigationRail(
         selected_index=0,
@@ -105,5 +96,5 @@ async def main(page: ft.Page):
         )
     )
 
-
+create_db()
 ft.run(main=main)

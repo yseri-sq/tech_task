@@ -9,6 +9,9 @@ class User(SQLModel, table=True):
 
 class Order(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
+    date: str
     device: str
     type: str
     description: str
+    client: str
+    status: str
