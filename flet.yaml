@@ -1,0 +1,8 @@
+hot_reload:
+  exclude:
+    - .venv/
+    - venv/
+    - __pycache__/
+    - .git/
+    - build/
+    - assets/

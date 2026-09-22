@@ -4,6 +4,9 @@ class RequestService:
     def __init__(self, repository: RequestRepository):
         self.repository = repository
 
+    def get_request(self, request_id):
+        return self.repository.get_by_id(request_id)
+
     def save_request(
             self,
             date,

@@ -1,4 +1,3 @@
-
 import flet as ft
 from datetime import datetime
 
@@ -14,10 +13,9 @@ def create_request_dialog():
         selected_date = e.control.value
 
         if selected_date:
-            date_field.current.value = (
-                selected_date.strftime("%d.%m.%Y")
-            )
+            local_date = selected_date.astimezone().date()
 
+            date_field.current.value = local_date.strftime("%d.%m.%Y")
             date_field.current.update()
 
     def open_datepicker(e):

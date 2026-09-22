@@ -4,7 +4,7 @@ from presentation.dialogs.request_dialog import (
 )
 from infrastructure.database import create_db
 
-from presentation.pages.home_page import home_page
+from presentation.pages.edit_page import edit_page
 from presentation.pages.requests_page import requests_page
 from presentation.pages.settings_page import settings_page
 
@@ -27,7 +27,7 @@ async def main(page: ft.Page):
         index = e.control.selected_index
 
         if index == 0:
-            body_content.controls.append(home_page())
+            body_content.controls.append(edit_page())
 
         elif index == 1:
             body_content.controls.append(requests_page())

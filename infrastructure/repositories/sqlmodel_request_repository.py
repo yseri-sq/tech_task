@@ -1,4 +1,4 @@
-from sqlmodel import Session
+from sqlmodel import Session, select
 
 from application.interfaces.request_repository import RequestRepository
 from domain.models.request import Request
@@ -30,5 +30,12 @@ class SQLModelRequestRepository(RequestRepository):
             session.add(request)
             session.commit()
             session.refresh(request)
+
+            return request
+
+    def get_by_id(self, request_id):
+        with Session(engine) as session:
+            # requests = session.exec(select(Request)).all()
+            request = session.get(Request, request_id)
 
             return request
