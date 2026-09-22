@@ -1,11 +1,19 @@
 import flet as ft
-from routers import page_0, page_1, page_2, dlg
-from db import create_db
+from presentation.dialogs.request_dialog import (
+    create_request_dialog
+)
+from infrastructure.database import create_db
+
+from presentation.pages.home_page import home_page
+from presentation.pages.requests_page import requests_page
+from presentation.pages.settings_page import settings_page
 
 async def main(page: ft.Page):
     page.window.width = 1420
     page.window.height = 830
     page.title = "App"
+    page.window.resizable = False
+    page.window.maximizable = False
     
 
     body_content=ft.Column(
@@ -19,13 +27,13 @@ async def main(page: ft.Page):
         index = e.control.selected_index
 
         if index == 0:
-            body_content.controls.append(page_0())
+            body_content.controls.append(home_page())
 
         elif index == 1:
-            body_content.controls.append(page_1())
+            body_content.controls.append(requests_page())
 
         elif index == 2:
-            body_content.controls.append(page_2())
+            body_content.controls.append(settings_page())
 
         page.update()
 
@@ -34,7 +42,6 @@ async def main(page: ft.Page):
         controls=[
             ft.IconButton(
                 icon=ft.Icons.LOGOUT,
-                #icon_color=
                 on_click=lambda e: print("qwe")
             ),
         ],
@@ -43,7 +50,9 @@ async def main(page: ft.Page):
     )
 
     def show_dlg(e):
-        page.show_dialog(dlg())
+        page.show_dialog(create_request_dialog())
+
+
 
     rail = ft.NavigationRail(
         selected_index=0,
